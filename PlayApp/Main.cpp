@@ -39,18 +39,22 @@ int main(int argc, char** argv)
 
     std::string scene_file = argv[1];
 
+    std::string output_file = scene_file + ".usd";
+
+    if (argc > 2) output_file = argv[2];
+
     TwoDSceneXMLParser xml_scene_parser;
     scalar dt, max_time;
 
     ParticleSimulation& simulation =
         xml_scene_parser.loadExecutableSimulation(
-            scene_file + ".xml",
+            scene_file,
             dt, max_time);
 
     int num_steps = ceil(max_time / dt);
     int current_step = 1;
 
-    TwoD2USD saviour(scene_file,simulation);
+    TwoD2USD saviour(output_file,simulation);
 
     assert(saviour.valid());
 
@@ -61,10 +65,9 @@ int main(int argc, char** argv)
             std::cout << "****** STEP " << current_step << " OF " << num_steps << std::endl;
 
             simulation.stepSystem(dt);
-            current_step++;
-
             saviour.save(simulation,current_step);
-        }
+            current_step++;
+       }
 
         std::cout << "Complete Simulation! Enter time to continue (exit with 0): "  << std::endl;
 

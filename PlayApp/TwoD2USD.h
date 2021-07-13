@@ -40,22 +40,33 @@ private :
 	//bool finalize();
 	UsdStageRefPtr m_stage;
 
-	//UsdPrim m_cloth;
+	// CLOTH
+	VtIntArray m_cloth_fi;
 	VtVec3fArray m_cloth_P;
 	UsdAttribute m_cloth_p_attr;
-	VtIntArray m_cloth_fi;
-	//int m_cloth_maxf;
 	UsdAttribute m_cloth_ext_attr;
 	//UsdAttribute m_cloth_v_attr;
 
+	// LIQUID
+	int m_nliquid;
+	int collectLiquid(const TwoDScene& scene, SerializePacket& fluid);
+	VtVec3fArray m_liquid_P;
+	UsdAttribute m_liquid_p_attr;
+	VtFloatArray m_liquid_width;
+	UsdAttribute m_liquid_width_attr;
+	UsdAttribute m_liquid_ext_attr;
 
-
-	//UsdPrim m_liquid;
-	//UsdPrim m_hairs;
+	// HAIR
+	int m_nhairs;
+	int collectHairs(const TwoDScene&, SerializePacket&);
+	VtVec3fArray m_hairs_P;
+	UsdAttribute m_hairs_p_attr;
+	VtFloatArray m_hairs_width;
+	UsdAttribute m_hairs_width_attr;
+	UsdAttribute m_hairs_ext_attr;
 
 	//UsdPrim m_springs;
 	//UsdPrim m_external;
 	//UsdPrim m_internals;
 
 };
-
