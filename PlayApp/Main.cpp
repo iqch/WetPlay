@@ -69,7 +69,7 @@ int main(int argc, char** argv)
             current_step++;
        }
 
-        std::cout << "Complete Simulation! Enter time to continue (exit with 0): "  << std::endl;
+        std::cout << "Complete Simulation. Enter additional time steps to continue (exit with 0): "  << std::endl;
 
         int new_time = 0;
         std::cin >> new_time;
