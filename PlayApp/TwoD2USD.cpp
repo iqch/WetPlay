@@ -296,6 +296,9 @@ bool TwoD2USD::save(const ParticleSimulation& sim, int frame)
         SerializePacket HAIRS;
         m_nhairs = collectHairs(scene, HAIRS);
 
+        m_hairs_width.resize(2*m_nhairs);
+        m_hairs_P.resize(2 * m_nhairs);
+
         for (int i = 0; i < m_nhairs; i++)
         {
             auto IDX = HAIRS.m_hair_indices[i];
@@ -333,7 +336,10 @@ bool TwoD2USD::save(const ParticleSimulation& sim, int frame)
     if (m_nliquid > 0)
     {
         SerializePacket LIQUID;
-        collectLiquid(scene, LIQUID);
+        m_nliquid = collectLiquid(scene, LIQUID);
+
+        m_liquid_P.resize(m_nliquid);
+        m_liquid_width.resize(m_nliquid);
 
         for (int i = 0; i < m_nliquid; i++)
         {
